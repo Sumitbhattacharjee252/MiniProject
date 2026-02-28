@@ -1,5 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.example</groupId>
@@ -17,47 +19,39 @@
   </properties>
 
   <dependencies>
-    <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+    <!-- Cucumber Java -->
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-java</artifactId>
       <version>7.31.0</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+    <!-- Cucumber TestNG -->
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-testng</artifactId>
       <version>7.31.0</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+    <!-- TestNG -->
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>7.9.0</version> <!-- or latest -->
+      <version>7.9.0</version>
       <scope>test</scope>
     </dependency>
 
-
-    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+    <!-- Selenium -->
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
       <version>4.38.0</version>
     </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
-    <dependency>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-surefire-plugin</artifactId>
-      <version>3.5.4</version>
-    </dependency>
-
   </dependencies>
 
   <build>
     <plugins>
+      <!-- Surefire Plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -66,9 +60,21 @@
           <suiteXmlFiles>
             <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
           </suiteXmlFiles>
+          <systemPropertyVariables>
+            <app.url>${app.url}</app.url>
+          </systemPropertyVariables>
         </configuration>
       </plugin>
     </plugins>
-
   </build>
+
+  <profiles>
+    <profile>
+      <id>qa-profile</id>
+      <properties>
+        <app.url>https://naveenautomationlabs.com/opencart/index.php?route=account/login</app.url>
+      </properties>
+    </profile>
+  </profiles>
+
 </project>
